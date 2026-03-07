@@ -1,0 +1,12 @@
+mcp[cli]
+langchain
+langchain-community
+langchain-chroma
+langchain-mongodb
+langchain-google-genai
+pymongo
+chromadb
+pydantic-settings
+python-box==6.1.0
+google-cloud-aiplatform
+ensure

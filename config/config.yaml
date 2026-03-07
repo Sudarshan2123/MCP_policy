@@ -1,0 +1,9 @@
+config:
+  RAG_MODEL: "gemini-2.5-flash"
+  EMBEDD_MODEL: "text-embedding-004"
+  CHROMA_HOST: "10.192.5.51"
+  CHROMA_PORT: 8000
+  COLLECTION_NAME: "langchain"
+  MONGODB_URI: "mongodb://test_user2:Pa$$woRD256$@10.192.5.46:27017/?directConnection=true"
+  DB_NAME: hr_ai_chatbot
+  HISTORY_COLLECTION_NAME: history
