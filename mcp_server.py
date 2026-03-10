@@ -3,7 +3,7 @@ from mcp.server.fastmcp import FastMCP
 from ChatProcess import ChatProcess
 from init import get_pipeline
 
-mcp = FastMCP("Policy retrival tool", log_level="ERROR",host="0.0.0.0",port=8000)
+mcp = FastMCP("Policy retrival tool", log_level="INFO")
 
 @mcp.tool(
     name = 'Policy_RAG_Implementation',
@@ -21,4 +21,4 @@ def policy(user_input:str) ->str:
         return(f"There is issue in the MCP server for the retrival of the Policy")
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    mcp.run(transport="sse")
