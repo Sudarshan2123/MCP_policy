@@ -7,3 +7,19 @@ config:
   MONGODB_URI: "mongodb://test_user2:Pa$$woRD256$@10.192.5.46:27017/?directConnection=true"
   DB_NAME: hr_ai_chatbot
   HISTORY_COLLECTION_NAME: history
+   # --- PostgreSQL ---
+  collection_user: User
+  POSTGRES_HOST: 10.192.5.51
+  POSTGRES_PORT: 5432
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+   # --- Redis ---
+  REDIS_USERNAME: default
+  REDIS_PASSWORD: redis@123#
+  REDIS_HOST: my_redis_server
+  REDIS_PORT: 6379
+  REDIS_DB: 0
+  CACHE_TTL: 28800
+  # --- Connection Pool ---
+  maxPoolSize: 350

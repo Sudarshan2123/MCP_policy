@@ -53,5 +53,17 @@ class Configuration_Manager:
             MONGODB_URI=config.MONGODB_URI,
             DB_NAME=config.DB_NAME,
             HISTORY_COLLECTION_NAME=config.HISTORY_COLLECTION_NAME,
+            COLLECTION_USER=config.COLLECTION_USER,
+            POSTGRES_HOST=config.POSTGRES_HOST,
+            POSTGRES_PORT=config.POSTGRES_PORT,
+            POSTGRES_DB=config.POSTGRES_DB,
+            POSTGRES_USER=config.POSTGRES_USER,
+            POSTGRES_PASSWORD=config.POSTGRES_PASSWORD,
+            REDIS_HOST=config.REDIS_HOST,
+            REDIS_PORT=config.REDIS_PORT,
+            REDIS_DB=config.REDIS_DB,
+            REDIS_USERNAME=config.REDIS_USERNAME,
+            REDIS_PASSWORD=config.REDIS_PASSWORD,
+            CACHE_TTL=config.CACHE_TTL,
         )
         return base_config

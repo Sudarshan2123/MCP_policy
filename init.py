@@ -29,7 +29,21 @@ class Init:
             port = Chroma_port,
         )
         self.Collection_Name = self.config.COLLECTION_NAME
-        self.session_id = str(uuid.uuid4()) 
+        self.session_id = str(uuid.uuid4())
+        self.engine = None
+        self.collection_user = self.config.COLLECTION_USER
+        self.postgres_host = self.config.POSTGRES_HOST
+        self.postgres_port = self.config.POSTGRES_PORT
+        self.postgres_db = self.config.POSTGRES_DB
+        self.postgres_pass = self.config.POSTGRES_PASSWORD
+        self.redis_host = self.config.REDIS_HOST
+        self.redis_port = self.config.REDIS_PORT
+        self.redis_db = self.config.REDIS_DB
+        self.redis_user = self.config.REDIS_USERNAME
+        self.redis_pass = self.config.REDIS_PASSWORD
+        self.cache_ttl = self.config.CACHE_TTL
+
+
 
 _pipeline = Init()
 
