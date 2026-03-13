@@ -56,17 +56,16 @@ def connect():
             result = conn.execute(text(query))
             table_names = [(row[0].lower(),row[1]) for row in result.fetchall()]
 
-            logger.info("Database connection successful")
-
         logger.info(f"Retrieved {len(table_names)} tables from DB")
 
-        chroma_client = chromadb.PersistentClient(path="C:/Users/101373/Pictures/MCP_policy/chroma_db")
-        logger.info("Connected to ChromaDB")
-        collection = chroma_client.get_or_create_collection(
+          # ✅ Use EphemeralClient from pipeline (fresh every restart, no stale data)
+        pipeline.chroma_collection = pipeline.chroma_client2.create_collection(
             name="table_collection",
             metadata={"hnsw:space": "cosine"}
         )
-        logger.info("ChromaDB collection ready")
+        collection = pipeline.chroma_collection  # ✅ local alias for use below
+        logger.info("ChromaDB collection created")
+
 
         for (table_name,columns) in table_names:
             if isinstance(columns, str):
@@ -88,7 +87,7 @@ def connect():
                 metadatas= [{"table_name": table_name,"columns":col_string}],
                 documents=[doc_text],
             )
-            
+
         logger.info("All tables processed and upserted into ChromaDB successfully")
 
     except Exception as e:

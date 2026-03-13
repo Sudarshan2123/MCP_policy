@@ -12,11 +12,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 def mmr_search(user_input: str, top_k: int = 5, lambda_val: float = 0.7, fetch_k: int = 10):
 
     pipeline = get_pipeline()
-    chroma_client = chromadb.PersistentClient(path="C:/Users/101373/Pictures/MCP_policy/chroma_db")
-    collection = chroma_client.get_or_create_collection(
-            name="table_collection",
-            metadata={"hnsw:space": "cosine"}
-    )
+    # ✅ Reuse the same EphemeralClient collection built in connect()
+    collection = pipeline.chroma_collection
+
+    if collection is None:
+        logger.warning("ChromaDB collection not ready yet")
+        return []
 
     q_embedding = pipeline.embeddings.embed_query(user_input)
 

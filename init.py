@@ -28,7 +28,8 @@ class Init:
             host = Chroma_host,
             port = Chroma_port,
         )
-        self.Collection_Name = self.config.COLLECTION_NAME
+        self.chroma_client2 = chromadb.EphemeralClient()         # for table_collection (SQL agent)
+        self.chroma_collection = None
         self.session_id = str(uuid.uuid4())
         self.engine = None
         self.collection_user = self.config.COLLECTION_USER
