@@ -1,5 +1,8 @@
+import os
+import shutil
 import sys
 import logging
+
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -22,7 +25,7 @@ import logging
 from sqlalchemy import QueuePool, create_engine, text
 
 
-mcp = FastMCP("Policy retrival tool", log_level="ERROR",host="127.0.0.1",port=8000)
+mcp = FastMCP("Policy retrival tool", log_level="ERROR",host="127.0.0.1",port=8080)
 
 def connect():
     try:
@@ -58,10 +61,14 @@ def connect():
 
         logger.info(f"Retrieved {len(table_names)} tables from DB")
 
-          # ✅ Use EphemeralClient from pipeline (fresh every restart, no stale data)
-        pipeline.chroma_collection = pipeline.chroma_client2.create_collection(
-            name="table_collection",
-            metadata={"hnsw:space": "cosine"}
+        chroma_path = "./chroma_db"
+        if os.path.exists(chroma_path):
+            shutil.rmtree(chroma_path)
+
+        chroma_client = chromadb.PersistentClient(path=chroma_path)
+        pipeline.chroma_collection = chroma_client.create_collection(
+        name="table_collection",
+        metadata={"hnsw:space": "cosine"}
         )
         collection = pipeline.chroma_collection  # ✅ local alias for use below
         logger.info("ChromaDB collection created")
@@ -125,5 +132,5 @@ def sqlagent(user_input:str) -> str:
 if __name__ == "__main__":
     init_thread = threading.Thread(target=connect, daemon=True)
     init_thread.start()
-    mcp.run(transport="sse")
+    mcp.run(transport="stdio")
 
