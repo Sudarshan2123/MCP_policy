@@ -82,7 +82,7 @@ class ChatProcess:
         self.pipeline = get_pipeline()
         self._initialize_vector = Chroma(
             client=self.pipeline._chroma_client,
-            collection_name=self.pipeline.Collection_Name,
+            collection_name=self.pipeline.chroma_collection_name,
             embedding_function=self.pipeline.embeddings,
         )
         logging.info("Connected to the Chroma server Successfully")

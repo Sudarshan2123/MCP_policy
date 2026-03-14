@@ -22,7 +22,7 @@ import logging
 from sqlalchemy import QueuePool, create_engine, text
 
 
-mcp = FastMCP("Policy retrival tool", log_level="ERROR")
+mcp = FastMCP("Policy retrival tool", log_level="ERROR",host="127.0.0.1",port=8000)
 
 def connect():
     try:
@@ -98,7 +98,7 @@ def connect():
     name = 'Policy_RAG_Implementation',
     description= 'The following tool is used for retrival of the policy documents for the chroma db according to the user provided question',
 )
-def policy(user_input:str) ->str:
+async def policy(user_input:str) ->str:
     try:
         pipeline = get_pipeline()
         ChatProcess_obj = ChatProcess()
@@ -125,5 +125,5 @@ def sqlagent(user_input:str) -> str:
 if __name__ == "__main__":
     init_thread = threading.Thread(target=connect, daemon=True)
     init_thread.start()
-    mcp.run(transport="stdio")
+    mcp.run(transport="sse")
 
