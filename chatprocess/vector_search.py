@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def mmr_search(user_input: str, top_k: int = 5, lambda_val: float = 0.7, fetch_k: int = 10):
+def mmr_search(user_input: str, top_k: int = 6, lambda_val: float = 0.8, fetch_k: int = 20):
 
     pipeline = get_pipeline()
     # ✅ Reuse the same EphemeralClient collection built in connect()
@@ -67,7 +67,9 @@ def run_sql_agent(relevant_tables,user_input):
 
     Rules:
     - Use ONLY the tables and columns provided
-    - Always use schema prefix: hrms.<table_name>
+    - CRITICAL: You must always double-quote the schema and table names.
+      Example: "HRMS_QA"."employ_leave_master"
+    - Always use schema prefix: "HRMS_QA".<table_name>
     - Return ONLY the raw SQL query, no markdown, no backticks, no explanation
     - If the question cannot be answered with the given tables, return exactly: INSUFFICIENT_TABLES
     """),

@@ -9,11 +9,11 @@ config:
   HISTORY_COLLECTION_NAME: history
    # --- PostgreSQL ---
   collection_user: User
-  POSTGRES_HOST: 10.192.5.51
-  POSTGRES_PORT: 5432
-  POSTGRES_DB: postgres
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
+  POSTGRES_HOST: 10.192.5.45
+  POSTGRES_PORT: 15432
+  POSTGRES_DB: TEST
+  POSTGRES_USER: HRMS_QA
+  POSTGRES_PASSWORD: pass#1234
    # --- Redis ---
   REDIS_USERNAME: default
   REDIS_PASSWORD: redis@123#

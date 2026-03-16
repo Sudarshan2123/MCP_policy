@@ -25,7 +25,7 @@ import logging
 from sqlalchemy import QueuePool, create_engine, text
 
 
-mcp = FastMCP("Policy retrival tool", log_level="ERROR",host="127.0.0.1",port=8080)
+mcp = FastMCP("Policy retrival tool", log_level="ERROR",host="0.0.0.0",port=8080)
 
 def connect():
     try:
@@ -50,7 +50,7 @@ def connect():
     FROM information_schema.columns c
     JOIN information_schema.tables t
         ON c.table_name = t.table_name AND c.table_schema = t.table_schema
-    WHERE c.table_schema = 'hrms' AND t.table_type = 'BASE TABLE'
+    WHERE c.table_schema = 'HRMS_QA' AND t.table_type = 'BASE TABLE'
     GROUP BY c.table_name
                  """
             )
@@ -132,5 +132,5 @@ def sqlagent(user_input:str) -> str:
 if __name__ == "__main__":
     init_thread = threading.Thread(target=connect, daemon=True)
     init_thread.start()
-    mcp.run(transport="stdio")
+    mcp.run(transport="sse")
 
